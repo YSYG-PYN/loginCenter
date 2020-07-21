@@ -1,7 +1,7 @@
 <template>
     <div class="welcome">
         <ul class="flatform">
-            <li @click="handleClick()">
+            <li @click="handleClick('/Traffic')">
                 <!-- <img style="opacity: 2;" src="../assets/images/welcome/flatformIcon1.png" alt=""> -->
                 <p>智慧交通</p>
             </li>
@@ -23,7 +23,7 @@
             <li>
                 <p>生态环境</p>
             </li>
-            <li>
+            <li @click="handleClick('/setUp')">
                 <p>基础设置</p>
             </li>
         </ul>
@@ -38,8 +38,8 @@ export default {
   },
   created () {},
   methods: {
-    handleClick () {
-      this.$router.push('/Traffic')
+    handleClick (path) {
+      this.$router.push(path)
     }
   }
 }

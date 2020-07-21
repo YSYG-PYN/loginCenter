@@ -6,6 +6,7 @@ import Home from '../components/Home'
 import Welcome from '../components/Welcome'
 import Traffic from '../components/power/Traffic'
 import Welcomes from '../components/power/welcomes'
+import Setup from '../components/setUp/setUp'
 
 Vue.use(VueRouter)
 
@@ -37,6 +38,10 @@ const routes = [
             component: Welcomes
           },
         ]
+      },
+      {
+        path: '/setUp',
+        component: Setup
       }
     ]
   }
