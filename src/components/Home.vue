@@ -6,17 +6,17 @@
                 <img src="../assets/images/home/logo.png"  alt="">
                 <span>九寨沟后台管理系统</span>
             </div>
-            <el-dropdown trigger="click">
+            <el-dropdown trigger="click" @command="handleCommand">
                 <span class="el-dropdown-link">
                  用户名称<i class="el-icon-arrow-down el-icon--right" color="#fff"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item>欢迎登录</el-dropdown-item>
-                    <el-dropdown-item icon="el-icon-lock">修改密码</el-dropdown-item>
-                    <el-dropdown-item icon="el-icon-user">账户管理</el-dropdown-item>
-                    <el-dropdown-item icon="el-icon-key">权限分配</el-dropdown-item>
-                    <el-dropdown-item icon="el-icon-house">岗位管理</el-dropdown-item>
-                    <el-dropdown-item icon="el-icon-switch-button">退出</el-dropdown-item>
+                    <el-dropdown-item command="editPassWord" icon="el-icon-lock">修改密码</el-dropdown-item>
+                    <el-dropdown-item command="accountManagement" icon="el-icon-user">账户管理</el-dropdown-item>
+                    <el-dropdown-item command="toAllocate" icon="el-icon-key">权限分配</el-dropdown-item>
+                    <el-dropdown-item command="postManagement" icon="el-icon-house">岗位管理</el-dropdown-item>
+                    <el-dropdown-item command="logout" icon="el-icon-switch-button">退出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </el-header>
@@ -66,9 +66,28 @@ export default {
     return {}
   },
   created () {},
-  methods: {},
+  methods: {
+    async handleCommand (command) {
+      if (command === 'logout') {
+        const {data: res} = await this.$http.get('/apis/loginCenter/oauth/oauth/revoke-token')
+        console.log(res)
+        if (res.resCode === 200) {
+          window.sessionStorage.clear()
+          this.$router.push('/login')
+        }
+      }
+    }
+    /*async logout () {
+      const {data: res} = await this.$http.get('/loginCenter/oauth/oauth/revoke-token')
+      console.log(res)
+      if (res.resCode === 200) {
+        window.sessionStorage.clear()
+        this.$router.push('/login')
+      }
+    }*/
+  },
   watch: {
-    
+
   }
 }
 </script>
